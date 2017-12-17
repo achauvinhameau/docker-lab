@@ -1,6 +1,6 @@
 # -*- Mode: Python; python-indent-offset: 4 -*-
 #
-# Time-stamp: <2017-12-10 16:22:38 alex>
+# Time-stamp: <2017-12-10 16:22:27 alex>
 #
 # --------------------------------------------------------------------
 # docker-lab-01 - prime number checker ws
@@ -36,7 +36,7 @@ def ws_info():
     return make_response(jsonify({
         'status': 'OK',
         'name': 'prime checker',
-        'version': 1
+        'version': 2
     }), 200)
 
 

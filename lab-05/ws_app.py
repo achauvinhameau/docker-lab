@@ -1,6 +1,6 @@
 # -*- Mode: Python; python-indent-offset: 4 -*-
 #
-# Time-stamp: <2017-12-10 16:22:38 alex>
+# Time-stamp: <2017-12-07 15:27:35 alex>
 #
 # --------------------------------------------------------------------
 # docker-lab-01 - prime number checker ws
@@ -21,28 +21,11 @@
 # --------------------------------------------------------------------
 
 """
- information module
+ flask app
 """
 
-from ws_app import app
-from flask import make_response, jsonify, request
+__version__ = "1.0"
+__date__ = "07/12/2017"
 
-
-@app.route('/info')
-def ws_info():
-    """
-    / ws : provides information
-    """
-    return make_response(jsonify({
-        'status': 'OK',
-        'name': 'prime checker',
-        'version': 1
-    }), 200)
-
-
-@app.errorhandler(404)
-def not_found(error):
-    """
-    handle the 404 error
-    """
-    return make_response(jsonify({'error': 'Not found'}), 404)
+from flask import Flask
+app = Flask(__name__)

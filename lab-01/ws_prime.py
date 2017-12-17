@@ -1,6 +1,6 @@
 # -*- Mode: Python; python-indent-offset: 4 -*-
 #
-# Time-stamp: <2017-12-07 16:06:52 alex>
+# Time-stamp: <2017-12-10 15:31:52 alex>
 #
 # --------------------------------------------------------------------
 # docker-lab-01 - prime number checker ws
@@ -25,10 +25,11 @@
 """
 
 import logging
+from datetime import datetime
 
 from ws_app import app
 from flask import make_response, jsonify, request
-from isPrime import isPrime
+from isPrime import *
 
 
 @app.route('/check/<int:iToCheck>', methods=['GET'])
@@ -39,9 +40,17 @@ def ws_check(iToCheck):
 
     logging.debug("check if prime i={}".format(iToCheck))
 
+    bmillis = datetime.now().microsecond
     r = isPrime(iToCheck)
+
+    amillis = datetime.now().microsecond
+    iReturnCode = 200
+    if not r:
+        iReturnCode = 202
 
     return make_response(jsonify({
         'status': 'OK',
-        'result': r
-    }), 200)
+        'number': iToCheck,
+        'result': r,
+        'delay': amillis - bmillis
+    }), iReturnCode)

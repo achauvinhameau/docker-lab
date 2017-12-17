@@ -1,6 +1,6 @@
 # -*- Mode: Python; python-indent-offset: 4 -*-
 #
-# Time-stamp: <2017-12-10 16:22:38 alex>
+# Time-stamp: <2017-12-10 15:21:36 alex>
 #
 # --------------------------------------------------------------------
 # docker-lab-01 - prime number checker ws
@@ -21,28 +21,66 @@
 # --------------------------------------------------------------------
 
 """
- information module
+ prime checker module
 """
 
-from ws_app import app
-from flask import make_response, jsonify, request
+import logging
+
+def isPrime(i):
+    """checks wether i is prime"""
+
+    if i <= 1:
+        return False
+
+    if i <= 3:
+        return True
+
+    if i % 2 == 0 or i % 3 == 0:
+        return False
+
+    return True
 
 
-@app.route('/info')
-def ws_info():
-    """
-    / ws : provides information
-    """
-    return make_response(jsonify({
-        'status': 'OK',
-        'name': 'prime checker',
-        'version': 1
-    }), 200)
+def isPrimev2(i):
+    """checks wether i is prime"""
+
+    if i <= 1:
+        return False
+
+    if i <= 3:
+        return True
+
+    if i % 2 == 0:
+        return False
+
+    bFlag = True
+    j = 3
+    while j < i:
+        if i % j == 0:
+            return False
+        j += 2
+
+    return bFlag
 
 
-@app.errorhandler(404)
-def not_found(error):
-    """
-    handle the 404 error
-    """
-    return make_response(jsonify({'error': 'Not found'}), 404)
+aPrime = [2,3]
+
+def isPrimev3(i):
+    """checks wether i is prime"""
+
+    logging.debug(aPrime)
+
+    if i <= 1:
+        return False
+
+    if i <= 3:
+        return True
+
+    for p in aPrime:
+        if i % p == 0:
+            return False
+
+    if len(aPrime) < 1000:
+        aPrime.append(i)
+
+    return True
